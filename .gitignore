@@ -1,0 +1,16 @@
+// for JS projects
+
+node_modules
+bundle.js
+bundle.js.map
+
+//for rails projects
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+/node_modules
+/yarn-error.log
+
+.byebug_history
