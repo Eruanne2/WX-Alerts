@@ -1,6 +1,6 @@
 // for JS projects
 
-api_keys.js
+secrets.js
 
 node_modules
 bundle.js
