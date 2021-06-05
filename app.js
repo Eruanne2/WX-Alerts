@@ -3,24 +3,15 @@ import axios from "axios";
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 import { WX_KEY, PHONE_NO } from "./secrets";
 
-// get weather
 
-const wxRequest = {
-  method: 'GET',
-  url: `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/history?&aggregateHours=24&startDateTime=2019-06-13T00:00:00&endDateTime=2019-06-20T00:00:00&unitGroup=uk&contentType=json&dayStartTime=0:0:00&dayEndTime=0:0:00&location=Enid,OK,US&key=${WX_KEY}`,
-}
+async function checkWX(){
 
-async function sendWX(){
-  wxData = await axios.request(wxRequest)
-  .then(response => response.data)
-  .catch(error => error);
-  console.log(wxData);
+  const wxRequest = {
+    method: 'GET',
+    url: `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/history?&aggregateHours=24&startDateTime=2019-06-13T00:00:00&endDateTime=2019-06-20T00:00:00&unitGroup=uk&contentType=json&dayStartTime=0:0:00&dayEndTime=0:0:00&location=Enid,OK,US&key=${WX_KEY}`,
+  }
 
-  sendWX();
-  
-  
-  // sms
-  
+
   /* SmtpJS.com - v3.0.0 */
   var Email = { send: function (a) { return new Promise(function (n, e) { a.nocache = Math.floor(1e6 * Math.random() + 1), a.Action = "Send"; var t = JSON.stringify(a); Email.ajaxPost("https://smtpjs.com/v3/smtpjs.aspx?", t, function (e) { n(e) }) }) }, ajaxPost: function (e, n, t) { var a = Email.createCORSRequest("POST", e); a.setRequestHeader("Content-type", "application/x-www-form-urlencoded"), a.onload = function () { var e = a.responseText; null != t && t(e) }, a.send(n) }, ajax: function (e, n) { var t = Email.createCORSRequest("GET", e); t.onload = function () { var e = t.responseText; null != n && n(e) }, t.send() }, createCORSRequest: function (e, n) { var t = new XMLHttpRequest; return "withCredentials" in t ? t.open(e, n, !0) : "undefined" != typeof XDomainRequest ? (t = new XDomainRequest).open(e, n) : t = null, t } };
   
@@ -45,13 +36,27 @@ async function sendWX(){
       Subject: "",
       'MIME-Version': '1.0rn',
       'Content-Type': "text/html; charset=ISO-8859-1rn",
-      Body: 'hello charis'
+      Body: textBody
     })
     .then(response => console.log(response))
     .catch(error => console.log(error));
     
   }
   
-  // sendText();
+
+  wxData = await axios.request(wxRequest)
+  .then(response => response.data)
+  .catch(error => error);
+
+
+  console.log(wxData);
+
+  if (wxData) {   // change this to check if there are alerts
+    var textBody;
+    
+    // sendText();
+  }
 
 }
+
+setInterval(checkWX, 900000); // runs every 15 min
