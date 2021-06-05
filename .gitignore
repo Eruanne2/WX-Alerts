@@ -1,5 +1,7 @@
 // for JS projects
 
+api_keys.js
+
 node_modules
 bundle.js
 bundle.js.map
