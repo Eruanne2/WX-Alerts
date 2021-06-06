@@ -1,6 +1,5 @@
 // run this file with `npm run babel-node app.js`
 
-
 import axios from "axios";
 // Email = require('https://smtpjs.com/v3/smtp.js');
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
@@ -11,8 +10,7 @@ async function checkWX(){
 
   const wxRequest = {
     method: 'GET',
-    // url: `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/history?&aggregateHours=24&startDateTime=2019-06-13T00:00:00&endDateTime=2019-06-20T00:00:00&unitGroup=uk&contentType=json&dayStartTime=0:0:00&dayEndTime=0:0:00&location=BatonRouge,LA,US&key=${WX_KEY}`,
-    url: `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?aggregateHours=24&contentType=json&unitGroup=us&locationMode=single&key=${WX_KEY}&locations=London%2CUK `
+    url: `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?aggregateHours=24&contentType=json&unitGroup=us&locationMode=single&key=${WX_KEY}&locations=Cameron,LA&alertLevel=detail`
   }
 
 
@@ -42,11 +40,12 @@ async function checkWX(){
   .then(response => response.data)
   .catch(error => error);
 
-
   console.log(wxData);
+  let alerts = wxData.location.alerts
 
-  if (wxData) {   // change this to check if there are alerts
-    var textBody;
+  if (alerts.length > 0) {   // change this to check if there are alerts
+    
+    var textBody; // create text body
     
     // sendText();
   }
