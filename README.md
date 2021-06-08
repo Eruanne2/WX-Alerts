@@ -7,13 +7,13 @@ I'm using email to text him (the email address I created for my Align Bank proje
     Email.send({
       Host: "smtp.gmail.com",
       Username: "alignbank@gmail.com",
-      Password: "UnsafePassword",
+      Password: EMAIL_PASSWORD,
       To: PHONE_NO,
       From: "alignbank@gmail.com",
       Subject: "",
       'MIME-Version': '1.0rn',
       'Content-Type': "text/html; charset=ISO-8859-1rn",
-      Body: textBody
+      Body: body
     })
 ```
 
