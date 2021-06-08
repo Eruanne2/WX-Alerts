@@ -17,4 +17,38 @@ I'm using email to text him (the email address I created for my Align Bank proje
     })
 ```
 
-The weather api I'm using is 
+The weather api I'm using is Visual Crossing Weather ([docs](https://www.visualcrossing.com/resources/documentation/weather-api/weather-api-documentation/)). It returns an option not only for current weather conditions, but also for active alerts.
+```javascript
+   { //...
+     address: 'Enid, OK, United States',
+     name: 'Enid,OK',
+     index: 0,
+     latitude: 36.3976,
+     longitude: -97.8783,
+     distance: 0,
+     time: 0,
+     tz: 'America/Chicago',
+     currentConditions:
+      { wdir: 135,
+        temp: 85.9,
+        sunrise: '2021-06-08T06:13:26-05:00',
+        visibility: 9.9,
+        wspd: 10.4,
+        icon: 'clear-day',
+        stations: '',
+        heatindex: 90.9,
+        cloudcover: 23.2,
+        datetime: '2021-06-08T18:30:33-05:00',
+        precip: 0,
+        moonphase: 0.99,
+        snowdepth: null,
+        sealevelpressure: 1011.9,
+        dew: 70.4,
+        sunset: '2021-06-08T20:48:10-05:00',
+        humidity: 60,
+        wgust: 11,
+        windchill: null 
+      },
+     alerts: [] 
+   }
+```
