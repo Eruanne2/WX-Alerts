@@ -1,9 +1,8 @@
 // run this file with `npm run babel-node app.js`
 
 import axios from "axios";
-// Email = require('https://smtpjs.com/v3/smtp.js');
-var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-import { WX_KEY, PHONE_NO } from "./secrets";
+import Email from './email';
+import { WX_KEY, PHONE_NO, EMAIL_PASSWORD } from "./secrets";
 
 
 async function checkWX(){
@@ -12,23 +11,19 @@ async function checkWX(){
     method: 'GET',
     url: `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?aggregateHours=24&contentType=json&unitGroup=us&locationMode=single&key=${WX_KEY}&locations=Cameron,LA&alertLevel=detail`
   }
-
-
-  /* SmtpJS.com - v3.0.0 */
-  var Email = { send: function (a) { return new Promise(function (n, e) { a.nocache = Math.floor(1e6 * Math.random() + 1), a.Action = "Send"; var t = JSON.stringify(a); Email.ajaxPost("https://smtpjs.com/v3/smtpjs.aspx?", t, function (e) { n(e) }) }) }, ajaxPost: function (e, n, t) { var a = Email.createCORSRequest("POST", e); a.setRequestHeader("Content-type", "application/x-www-form-urlencoded"), a.onload = function () { var e = a.responseText; null != t && t(e) }, a.send(n) }, ajax: function (e, n) { var t = Email.createCORSRequest("GET", e); t.onload = function () { var e = t.responseText; null != n && n(e) }, t.send() }, createCORSRequest: function (e, n) { var t = new XMLHttpRequest; return "withCredentials" in t ? t.open(e, n, !0) : "undefined" != typeof XDomainRequest ? (t = new XDomainRequest).open(e, n) : t = null, t } };
   
-  function sendText() {
+  function sendText(body) {
     
     Email.send({
       Host: "smtp.gmail.com",
       Username: "alignbank@gmail.com",
-      Password: "UnsafePassword",
+      Password: EMAIL_PASSWORD,
       To: PHONE_NO,
       From: "alignbank@gmail.com",
       Subject: "",
       'MIME-Version': '1.0rn',
       'Content-Type': "text/html; charset=ISO-8859-1rn",
-      Body: textBody
+      Body: body
     })
     .then(response => console.log(response))
     .catch(error => console.log(error));
@@ -43,11 +38,11 @@ async function checkWX(){
   console.log(wxData);
   let alerts = wxData.location.alerts
 
-  if (alerts.length > 0) {   // change this to check if there are alerts
+  if (true) {   // change this to check if there are alerts
     
-    var textBody; // create text body
+    var textBody = alerts; // create text body
     
-    // sendText();
+    sendText(textBody);
   }
 
 }
