@@ -21,7 +21,7 @@ I'm [using email to text him](https://www.techrepublic.com/blog/microsoft-office
   }
 ```
 
-The weather api I'm using is [Visual Crossing Weather](https://www.visualcrossing.com/resources/documentation/weather-api/weather-api-documentation/)). It returns an option not only for current weather conditions, but also for active alerts.
+The weather api I'm using is [Visual Crossing Weather](https://www.visualcrossing.com/resources/documentation/weather-api/weather-api-documentation/). It returns an option not only for current weather conditions, but also for active alerts.
 ```javascript
    { //...
      address: 'Enid, OK, United States',
