@@ -53,4 +53,5 @@ The weather api I'm using is Visual Crossing Weather ([docs](https://www.visualc
    }
 ```
 
-I plan to set this up with a scheduler that will run it every 15 minutes. 
+I plan to include each of the cities he wants in the request, then check the alert arrays to see if they have anything in them. If so, the alerts will be formatted into a text body and sent to his number. 
+I will set this script up on a scheduler that will run it every 15 minutes, so any time there is a weather event in one of the given locations, he should receive a text about it within no more than than amount of time.
