@@ -9,11 +9,10 @@ async function checkWX(){
 
   const wxRequest = {
     method: 'GET',
-    url: `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?aggregateHours=24&contentType=json&unitGroup=us&locationMode=single&key=${WX_KEY}&locations=Cameron,LA&alertLevel=detail`
+    url: `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?aggregateHours=24&contentType=json&unitGroup=us&locationMode=single&key=${WX_KEY}&locations=Enid,OK&alertLevel=detail`
   }
   
   function sendText(body) {
-    
     Email.send({
       Host: "smtp.gmail.com",
       Username: "alignbank@gmail.com",
@@ -27,7 +26,6 @@ async function checkWX(){
     })
     .then(response => console.log(response))
     .catch(error => console.log(error));
-    
   }
   
 
@@ -38,10 +36,8 @@ async function checkWX(){
   console.log(wxData);
   let alerts = wxData.location.alerts
 
-  if (true) {   // change this to check if there are alerts
-    
+  if (alerts.length > 0) {
     var textBody = alerts; // create text body
-    
     sendText(textBody);
   }
 
