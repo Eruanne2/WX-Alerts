@@ -2,7 +2,7 @@
 
 Just a small script I'm testing for my husband. He loves to keep track of weather in the various places we've lived, so I want to set up an alert that will text him any time there is a major weather event in any of those places.
 
-I'm using email to text him (the email address I created for my Align Bank project, lol), which is a pretty great way to avoid having to use an SMS api :)
+I'm [using email to text him](https://www.techrepublic.com/blog/microsoft-office/use-outlook-to-send-e-mail-to-a-cell-phone/) (from the email address I created for my Align Bank project lol), which is a pretty great way to avoid having to use an SMS api. :)
 ```javascript
   function sendText(body) {
     Email.send({
@@ -21,7 +21,7 @@ I'm using email to text him (the email address I created for my Align Bank proje
   }
 ```
 
-The weather api I'm using is Visual Crossing Weather ([docs](https://www.visualcrossing.com/resources/documentation/weather-api/weather-api-documentation/)). It returns an option not only for current weather conditions, but also for active alerts.
+The weather api I'm using is [Visual Crossing Weather](https://www.visualcrossing.com/resources/documentation/weather-api/weather-api-documentation/). It returns an option not only for current weather conditions, but also for active alerts.
 ```javascript
    { //...
      address: 'Enid, OK, United States',
