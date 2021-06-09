@@ -2,22 +2,22 @@
 
 import axios from "axios";
 import Email from './email';
-import { WX_KEY, PHONE_NO, EMAIL_PASSWORD } from "./secrets";
+import { WX_KEY, RYAN_NO, CHARIS_NO, EMAIL_PASSWORD } from "./secrets";
 
 
 async function checkWX(){
 
   const wxRequest = {
     method: 'GET',
-    url: `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?aggregateHours=24&contentType=json&unitGroup=us&locationMode=single&key=${WX_KEY}&locations=Enid,OK&alertLevel=detail`
+    url: `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?aggregateHours=24&contentType=json&unitGroup=us&locationMode=array&key=${WX_KEY}&locations=Enid,OK|Tyrone,GA|Alamogordo,NM|Cloudcroft,NM|WitchitaFalls,TX|Atlanta,GA&alertLevel=detail`
   }
   
-  function sendText(body) {
+  function sendText(recipient, body) {
     Email.send({
       Host: "smtp.gmail.com",
       Username: "alignbank@gmail.com",
       Password: EMAIL_PASSWORD,
-      To: PHONE_NO,
+      To: recipient,
       From: "alignbank@gmail.com",
       Subject: "",
       'MIME-Version': '1.0rn',
@@ -34,13 +34,17 @@ async function checkWX(){
   .catch(error => error);
 
   console.log(wxData);
-  let alerts = wxData.location.alerts
+  let alerts = {};
+  wxData.locations.forEach(location => alerts[location.name] = location.alerts)
+  console.log(alerts)
 
-  if (alerts.length > 0) {
-    var textBody = alerts; // create text body
-    sendText(textBody);
-  }
-
+  Object.keys(alerts).forEach(location => {
+    alerts[location].forEach(alert => {
+      sendText(RYAN_NO, alert.headline);
+      sendText(CHARIS_NO, alert.headline);
+    })
+  })
+  
 }
 
 checkWX(); // set script to run every 15 min (on heroku?)
