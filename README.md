@@ -52,3 +52,5 @@ The weather api I'm using is Visual Crossing Weather ([docs](https://www.visualc
      alerts: [] 
    }
 ```
+
+I plan to set this up with a scheduler that will run it every 15 minutes. 
