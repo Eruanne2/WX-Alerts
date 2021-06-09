@@ -4,6 +4,7 @@ Just a small script I'm testing for my husband. He loves to keep track of weathe
 
 I'm using email to text him (the email address I created for my Align Bank project, lol), which is a pretty great way to avoid having to use an SMS api :)
 ```javascript
+  function sendText(body) {
     Email.send({
       Host: "smtp.gmail.com",
       Username: "alignbank@gmail.com",
@@ -15,6 +16,9 @@ I'm using email to text him (the email address I created for my Align Bank proje
       'Content-Type': "text/html; charset=ISO-8859-1rn",
       Body: body
     })
+    .then(response => console.log(response))
+    .catch(error => console.log(error));
+  }
 ```
 
 The weather api I'm using is Visual Crossing Weather ([docs](https://www.visualcrossing.com/resources/documentation/weather-api/weather-api-documentation/)). It returns an option not only for current weather conditions, but also for active alerts.
