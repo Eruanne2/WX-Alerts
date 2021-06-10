@@ -1,6 +1,6 @@
 // for JS projects
 
-secrets.js
+config/keys_dev.js
 
 node_modules
 bundle.js

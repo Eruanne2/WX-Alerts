@@ -2,7 +2,7 @@
 
 import axios from "axios";
 import Email from './email';
-import { WX_KEY, RYAN_NO, CHARIS_NO, EMAIL_PASSWORD } from "./secrets";
+import { WX_KEY, RYAN_NO, CHARIS_NO, EMAIL_PASSWORD } from "./config/keys";
 
 
 async function checkWX(){
@@ -38,14 +38,20 @@ async function checkWX(){
   wxData.locations.forEach(location => alerts[location.name] = location.alerts)
   console.log(alerts)
 
+  let preferences = ['snow', 'hail', 'storm', 'tornado', 'hurricane', 'flood'];
+
   Object.keys(alerts).forEach(location => {
     alerts[location].forEach(alert => {
-      if (alert.headline )
-      // sendText(RYAN_NO, alert.headline);
-      sendText(CHARIS_NO, alert.headline);
+      preferences.forEach(keyword => {
+        if (alert.headline.toLowerCase().includes(keyword)){
+          sendText(RYAN_NO, alert.headline);
+          sendText(CHARIS_NO, alert.headline);
+        }
+      })
+
     })
   })
   
 }
 
-checkWX(); // set script to run every 15 min (on heroku?)
+checkWX();
