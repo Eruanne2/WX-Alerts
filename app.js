@@ -49,3 +49,4 @@ async function checkWX(){
 }
 
 checkWX();
+sendText(CHARIS_NO, 'working :D');
