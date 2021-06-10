@@ -1,6 +1,6 @@
 # WX-Alerts
 
-Just a small script I'm testing for my husband. He loves to keep track of weather in the various places we've lived, so I want to set up an alert that will text him any time there is a major weather event in any of those places.
+Just a small script I wrote for my husband. He loves to keep track of weather in the various places we've lived, so I have set up an alert that will text him any time there is a major weather event in any of those places.
 
 I'm [using email to text him](https://www.techrepublic.com/blog/microsoft-office/use-outlook-to-send-e-mail-to-a-cell-phone/) (from the email address I created for my Align Bank project lol), which is a pretty great way to avoid having to use an SMS api. :)
 ```javascript
@@ -57,17 +57,23 @@ The weather api I'm using is [Visual Crossing Weather](https://www.visualcrossin
    }
 ```
 
-I plan to include each of the cities he wants in the request, then check the alert arrays to see if they have anything in them. If so, the alerts will be formatted into a text body and sent to his number. 
+The api request includes 6 different cities he wants to receive alerts for. When the response is received, each location will be checked for alerts, and each alert will be checked to see if they contain any of the keywords he wants to watch for. If so, the headline of the alert will be sent directly to his number (and mine right now while I'm still testing it). 
 ```javascript
   let wxData = await axios.request(wxRequest)
   .then(response => response.data)
   .catch(error => error);
 
-  let alerts = wxData.location.alerts
+  let preferences = ['snow', 'hail', 'storm', 'tornado', 'hurricane', 'flood', 'winter', 'ice'];
 
-  if (alerts.length > 0) {
-    var textBody = alerts; // create text body
-    sendText(textBody);
-  }
+  wxData.locations.forEach(location => {
+    location.alerts.forEach(alert => {
+      preferences.forEach(keyword => {
+        if (alert.headline.toLowerCase().includes(keyword)){
+          sendText(RYAN_NO, alert.headline);
+          sendText(CHARIS_NO, alert.headline);
+        }
+      })
+    })
+  })
   ```
-I will set this script up on a scheduler that will run it every 15 minutes, so any time there is a weather event in one of the given locations, he should receive a text about it within no more than than amount of time.
+The script is set up to run on Heroku Scheduler once per hour. 
