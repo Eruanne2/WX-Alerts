@@ -40,7 +40,8 @@ async function checkWX(){
 
   Object.keys(alerts).forEach(location => {
     alerts[location].forEach(alert => {
-      sendText(RYAN_NO, alert.headline);
+      if (alert.headline )
+      // sendText(RYAN_NO, alert.headline);
       sendText(CHARIS_NO, alert.headline);
     })
   })
