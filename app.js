@@ -2,14 +2,14 @@
 
 import axios from "axios";
 import Email from './email';
-import { WX_KEY, RYAN_NO, CHARIS_NO, EMAIL_PASSWORD } from "./config/keys";
+import { WX_KEY, RYAN_NO, CHARIS_NO, DAD_MORSE_NO, MOM_MORSE_NO, EMAIL_PASSWORD } from "./config/keys";
 
 
 async function checkWX(){
 
   const wxRequest = {
     method: 'GET',
-    url: `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?aggregateHours=24&contentType=json&unitGroup=us&locationMode=array&key=${WX_KEY}&locations=Enid,OK|Tyrone,GA|Alamogordo,NM|Cloudcroft,NM|WitchitaFalls,TX|Atlanta,GA&alertLevel=detail`
+    url: `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?aggregateHours=24&contentType=json&unitGroup=us&locationMode=array&key=${WX_KEY}&locations=Enid,OK|Tyrone,GA|Alamogordo,NM|Cloudcroft,NM|WitchitaFalls,TX|Atlanta,GA|Valdosta,GA&alertLevel=detail`
   }
   
   function sendText(recipient, body) {
@@ -41,6 +41,8 @@ async function checkWX(){
         if (alert.headline.toLowerCase().includes(keyword)){
           sendText(RYAN_NO, alert.headline);
           sendText(CHARIS_NO, alert.headline);
+          sendText(DAD_MORSE_NO, alert.headline);
+          sendText(MOM_MORSE_NO, alert.headline);
         }
       })
     })
