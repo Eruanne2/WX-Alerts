@@ -57,7 +57,7 @@ The weather api I'm using is [Visual Crossing Weather](https://www.visualcrossin
    }
 ```
 
-The api request includes 6 different cities he wants to receive alerts for. When the response is received, each location will be checked for alerts, and each alert will be checked to see if they contain any of the keywords he wants to watch for. If so, the headline of the alert will be sent directly to his number (and mine right now while I'm still testing it). 
+The api request includes the names of 7 different cities he wants to receive alerts for. When the response is received, each location will be checked for active alerts, and each alert will be checked to see if they contain any of the keywords he wants to watch for. If so, the headline of the alert will be sent directly to his number (and mine right now while I'm still testing it). 
 ```javascript
   let wxData = await axios.request(wxRequest)
   .then(response => response.data)
@@ -76,4 +76,4 @@ The api request includes 6 different cities he wants to receive alerts for. When
     })
   })
   ```
-The script is set up to run on Heroku Scheduler once per hour. 
+The script is set up to run on Heroku Scheduler once per hour.
