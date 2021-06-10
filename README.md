@@ -77,3 +77,5 @@ The api request includes the names of 7 different cities he wants to receive ale
   })
   ```
 The script is set up to run on Heroku Scheduler once per hour.
+
+Update: my parents had me add them for weather alerts as well. I may eventually go through and set up a backend to store phone numbers and preferences so that users can sign up. 🤷‍♀️
