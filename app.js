@@ -46,7 +46,6 @@ async function checkWX(){
     })
   })
   
-  sendText(CHARIS_NO, 'working :D');
 }
 
 checkWX();
