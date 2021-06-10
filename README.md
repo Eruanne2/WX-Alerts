@@ -63,11 +63,18 @@ I plan to include each of the cities he wants in the request, then check the ale
   .then(response => response.data)
   .catch(error => error);
 
-  let alerts = wxData.location.alerts
+  let preferences = ['snow', 'hail', 'storm', 'tornado', 'hurricane', 'flood', 'winter', 'ice'];
 
-  if (alerts.length > 0) {
-    var textBody = alerts; // create text body
-    sendText(textBody);
-  }
+  wxData.locations.forEach(location => {
+    location.alerts.forEach(alert => {
+      preferences.forEach(keyword => {
+        if (alert.headline.toLowerCase().includes(keyword)){
+          sendText(RYAN_NO, alert.headline);
+          sendText(CHARIS_NO, alert.headline);
+        }
+      })
+    })
+  })
   ```
-I will set this script up on a scheduler that will run it every 15 minutes, so any time there is a weather event in one of the given locations, he should receive a text about it within no more than than amount of time.
+As you can see, I have filtered the alerts to only include severe weather events. This will avoid hourly texts for frequent occurences such as a heat advisory. 
+This script is set up to run on Heroku Scheduler once per hour. 
