@@ -33,22 +33,16 @@ async function checkWX(){
   .then(response => response.data)
   .catch(error => error);
 
-  console.log(wxData);
-  let alerts = {};
-  wxData.locations.forEach(location => alerts[location.name] = location.alerts)
-  console.log(alerts)
+  let preferences = ['snow', 'hail', 'storm', 'tornado', 'hurricane', 'flood', 'winter', 'ice'];
 
-  let preferences = ['snow', 'hail', 'storm', 'tornado', 'hurricane', 'flood'];
-
-  Object.keys(alerts).forEach(location => {
-    alerts[location].forEach(alert => {
+  wxData.locations.forEach(location => {
+    location.alerts.forEach(alert => {
       preferences.forEach(keyword => {
         if (alert.headline.toLowerCase().includes(keyword)){
           sendText(RYAN_NO, alert.headline);
           sendText(CHARIS_NO, alert.headline);
         }
       })
-
     })
   })
   
