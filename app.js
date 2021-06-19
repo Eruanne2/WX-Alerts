@@ -41,8 +41,8 @@ async function checkWX(){
         if (alert.headline.toLowerCase().includes(keyword)){
           // sendText(RYAN_NO, alert.headline);
           sendText(CHARIS_NO, alert.headline);
-          sendText(DAD_MORSE_NO, alert.headline);
-          sendText(MOM_MORSE_NO, alert.headline);
+          // sendText(DAD_MORSE_NO, alert.headline);
+          // sendText(MOM_MORSE_NO, alert.headline);
         }
       })
     })
