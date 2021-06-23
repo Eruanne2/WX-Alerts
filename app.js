@@ -11,6 +11,15 @@ async function checkWX(){
     method: 'GET',
     url: `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?aggregateHours=24&contentType=json&unitGroup=us&locationMode=array&key=${WX_KEY}&locations=Enid,OK|Tyrone,GA|Alamogordo,NM|Cloudcroft,NM|WitchitaFalls,TX|Atlanta,GA|Valdosta,GA&alertLevel=detail`
   }
+
+  function hasKeyword(alert, keyword) {
+    alert.headline.toLowerCase().includes(keyword)
+  }
+
+  function isNewAlert(alert) {
+    timeStart = alert.headline.index(' at ') + 5
+    return true;
+  }
   
   function sendText(recipient, body) {
     Email.send({
@@ -38,7 +47,7 @@ async function checkWX(){
   wxData.locations.forEach(location => {
     location.alerts.forEach(alert => {
       preferences.forEach(keyword => {
-        if (alert.headline.toLowerCase().includes(keyword)){
+        if (hasKeyword(alert, keyword) && isNewAlert(alert)){
           // sendText(RYAN_NO, alert.headline);
           sendText(CHARIS_NO, alert.headline);
           // sendText(DAD_MORSE_NO, alert.headline);
