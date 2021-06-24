@@ -17,7 +17,9 @@ async function checkWX(){
   }
 
   function isNewAlert(alert) {
-    timeStart = alert.headline.index(' at ') + 5
+    timeStart = alert.headline.indexOf(' at ') + ' at '.length;
+    timeEnd = alert.headline.indexOf(' until');
+    time = alert.headline.slice(timeStart, timeEnd);
     return true;
   }
   
