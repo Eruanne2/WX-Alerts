@@ -17,10 +17,17 @@ async function checkWX(){
   }
 
   function isNewAlert(alert) {
-    timeStart = alert.headline.indexOf(' at ') + ' at '.length;
-    timeEnd = alert.headline.indexOf(' until');
-    time = alert.headline.slice(timeStart, timeEnd);
-    return true;
+    let currentTime = new Date();
+    let alertStart = new Date(alert.onset);
+    let ONE_HOUR = 60 * 60 * 1000;
+
+    // console.log("alert time: " + new Date(alert.onset));
+    // console.log("current time: " + new Date());
+    // console.log(alertStart - currentTime);
+    // console.log(ONE_HOUR);
+    // console.log((alertStart - currentTime) < ONE_HOUR);
+
+    return ((alertStart - currentTime) < ONE_HOUR);
   }
   
   function sendText(recipient, body) {
@@ -46,9 +53,11 @@ async function checkWX(){
 
   let preferences = ['snow', 'hail', 'storm', 'tornado', 'hurricane', 'flood', 'winter', 'ice'];
 
+  debugger
   wxData.locations.forEach(location => {
     location.alerts.forEach(alert => {
       preferences.forEach(keyword => {
+        // if (isNewAlert(alert)){
         if (hasKeyword(alert, keyword) && isNewAlert(alert)){
           // sendText(RYAN_NO, alert.headline);
           sendText(CHARIS_NO, alert.headline);
