@@ -21,7 +21,7 @@ async function checkWX(){
     let currentTime = new Date();
     let alertStart = new Date(alert.onset);
     let ONE_HOUR = 60 * 60 * 1000;
-    return ((alertStart - currentTime) < ONE_HOUR);
+    return ((currentTime - alertStart) < ONE_HOUR);
   }
   
   function sendText(recipient, body) {
