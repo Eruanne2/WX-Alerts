@@ -1,5 +1,6 @@
 // run this file with `npm run babel-node app.js`
 
+import moment from 'moment'
 import axios from "axios";
 import Email from './email';
 import { WX_KEY, RYAN_NO, CHARIS_NO, DAD_MORSE_NO, MOM_MORSE_NO, EMAIL_PASSWORD } from "./config/keys";
@@ -17,10 +18,20 @@ async function checkWX(){
   } 
 
   function isNewAlert(alert) {
-    let currentTime = new Date();
-    let alertStart = new Date(alert.onset);
-    let ONE_HOUR = 60 * 60 * 1000;
-    return ((currentTime - alertStart) < ONE_HOUR);
+    let currentTime = Math.floor(Date.now() / 1000)
+    let alertStart = alert.onsetEpoch;
+    let ONE_HOUR = 60 * 60;
+
+    // console.log(currentTime - ONE_HOUR);
+    // console.log(alertStart);
+    // console.log((currentTime - (60 * 30 * 1000)) < (currentTime - ONE_HOUR));
+    // console.log(alertStart);
+    console.log(alertStart);
+    // console.log(currentTime - ONE_HOUR);
+    console.log(currentTime);
+    // console.log(ONE_HOUR);
+
+    return (alertStart > (currentTime - ONE_HOUR));
   }
   
   function sendText(recipient, body) {
@@ -51,8 +62,9 @@ async function checkWX(){
     location.alerts.forEach(alert => {
       preferences.forEach(keyword => {
         if (hasKeyword(alert, keyword) && isNewAlert(alert)){
+          console.log('send text');
           // sendText(RYAN_NO, alert.headline);
-          sendText(CHARIS_NO, alert.headline);
+          // sendText(CHARIS_NO, alert.headline);
           // sendText(DAD_MORSE_NO, alert.headline);
           // sendText(MOM_MORSE_NO, alert.headline);
         }
