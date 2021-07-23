@@ -18,20 +18,22 @@ async function checkWX(){
   } 
 
   function isNewAlert(alert) {
-    let currentTime = Math.floor(Date.now() / 1000)
+    let currentTime = Math.floor(Date.now() / 1000) //convert to whole seconds
     let alertStart = alert.onsetEpoch;
     let ONE_HOUR = 60 * 60;
 
-    // console.log(currentTime - ONE_HOUR);
-    // console.log(alertStart);
-    // console.log((currentTime - (60 * 30 * 1000)) < (currentTime - ONE_HOUR));
-    // console.log(alertStart);
+    console.log(alert.onset)
     console.log(alertStart);
-    // console.log(currentTime - ONE_HOUR);
-    console.log(currentTime);
-    // console.log(ONE_HOUR);
 
-    return (alertStart > (currentTime - ONE_HOUR));
+    console.log(new Date())
+    console.log(currentTime);
+
+    console.log(ONE_HOUR);
+    console.log((currentTime - alertStart) <= ONE_HOUR);
+    // console.log(alertStart > (currentTime - ONE_HOUR))
+
+    // return (alertStart > (currentTime - ONE_HOUR));
+    return ((currentTime - alertStart) <= ONE_HOUR);
   }
   
   function sendText(recipient, body) {
@@ -64,7 +66,7 @@ async function checkWX(){
         if (hasKeyword(alert, keyword) && isNewAlert(alert)){
           console.log('send text');
           // sendText(RYAN_NO, alert.headline);
-          // sendText(CHARIS_NO, alert.headline);
+          sendText(CHARIS_NO, alert.headline);
           // sendText(DAD_MORSE_NO, alert.headline);
           // sendText(MOM_MORSE_NO, alert.headline);
         }
