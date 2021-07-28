@@ -1,6 +1,5 @@
 // run this file with `npm run babel-node app.js`
 
-import moment from 'moment'
 import axios from "axios";
 import Email from './email';
 import { WX_KEY, RYAN_NO, CHARIS_NO, DAD_MORSE_NO, MOM_MORSE_NO, EMAIL_PASSWORD } from "./config/keys";
@@ -10,7 +9,7 @@ async function checkWX(){
 
   const wxRequest = {
     method: 'GET',
-    url: `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?aggregateHours=24&contentType=json&unitGroup=us&locationMode=array&key=${WX_KEY}&locations=Enid,OK|Tyrone,GA|Alamogordo,NM|Cloudcroft,NM|WitchitaFalls,TX|Atlanta,GA|Valdosta,GA&alertLevel=detail`
+    url: `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?aggregateHours=24&contentType=json&unitGroup=us&locationMode=array&key=${WX_KEY}&locations=Enid,OK|Tyrone,GA|Alamogordo,NM|Cloudcroft,NM|WitchitaFalls,TX|Atlanta,GA|Valdosta,GA|LandOLakes,WI&alertLevel=detail`
   }
 
   function hasKeyword(alert, keyword) {
@@ -18,11 +17,13 @@ async function checkWX(){
   } 
 
   function isNewAlert(alert) {
+    console.log(alert)
     let currentTime = Math.floor(Date.now() / 1000) //convert to whole seconds
     let alertStart = alert.onsetEpoch;
     let ONE_HOUR = 60 * 60;
 
     console.log(alert.onset)
+    console.log(new Date(alert.onset))
     console.log(alertStart);
 
     console.log(new Date())
@@ -34,6 +35,14 @@ async function checkWX(){
 
     // return (alertStart > (currentTime - ONE_HOUR));
     return ((currentTime - alertStart) <= ONE_HOUR);
+  }
+
+  function sleep(milliseconds) {
+    const date = Date.now();
+    let currentDate = null;
+    do {
+      currentDate = Date.now();
+    } while (currentDate - date < milliseconds);
   }
   
   function sendText(recipient, body) {
@@ -68,7 +77,8 @@ async function checkWX(){
           // sendText(RYAN_NO, alert.headline);
           sendText(CHARIS_NO, alert.headline);
           // sendText(DAD_MORSE_NO, alert.headline);
-          // sendText(MOM_MORSE_NO, alert.headline);
+          // sendText(MOM_MORSE_NO, alert.headline); 
+          sleep(30000);
         }
       })
     })
