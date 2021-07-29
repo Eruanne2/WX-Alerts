@@ -9,7 +9,7 @@ async function checkWX(){
 
   const wxRequest = {
     method: 'GET',
-    url: `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?aggregateHours=24&contentType=json&unitGroup=us&locationMode=array&key=${WX_KEY}&locations=Enid,OK|Tyrone,GA|Alamogordo,NM|Cloudcroft,NM|WitchitaFalls,TX|Atlanta,GA|Valdosta,GA|LandOLakes,WI&alertLevel=detail`
+    url: `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?aggregateHours=24&contentType=json&unitGroup=us&locationMode=array&key=${WX_KEY}&locations=Enid,OK|Tyrone,GA|Alamogordo,NM|Cloudcroft,NM|WitchitaFalls,TX|Atlanta,GA|Valdosta,GA&alertLevel=detail`
   }
 
   function hasKeyword(alert, keyword) {
@@ -31,9 +31,7 @@ async function checkWX(){
 
     console.log(ONE_HOUR);
     console.log((currentTime - alertStart) <= ONE_HOUR);
-    // console.log(alertStart > (currentTime - ONE_HOUR))
 
-    // return (alertStart > (currentTime - ONE_HOUR));
     return ((currentTime - alertStart) <= ONE_HOUR);
   }
 
@@ -68,16 +66,15 @@ async function checkWX(){
 
   let preferences = ['snow', 'hail', 'storm', 'tornado', 'hurricane', 'flood', 'winter', 'ice', 'severe'];
 
-
   wxData.locations.forEach(location => {
     location.alerts.forEach(alert => {
       preferences.forEach(keyword => {
         if (hasKeyword(alert, keyword) && isNewAlert(alert)){
           console.log('send text');
-          // sendText(RYAN_NO, alert.headline);
-          sendText(CHARIS_NO, alert.headline);
-          // sendText(DAD_MORSE_NO, alert.headline);
-          // sendText(MOM_MORSE_NO, alert.headline); 
+          // sendText(RYAN_NO, `${location.id} - ${alert.headline}`);
+          sendText(CHARIS_NO, `${location.id} - ${alert.headline}`);
+          // sendText(DAD_MORSE_NO, `${location.id} - ${alert.headline}`);
+          // sendText(MOM_MORSE_NO, `${location.id} - ${alert.headline}`); 
           sleep(30000);
         }
       })
