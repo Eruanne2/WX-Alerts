@@ -75,7 +75,7 @@ async function checkWX(){
           sendText(CHARIS_NO, `${location.id} - ${alert.headline}`);
           // sendText(DAD_MORSE_NO, `${location.id} - ${alert.headline}`);
           // sendText(MOM_MORSE_NO, `${location.id} - ${alert.headline}`); 
-          sleep(30000);
+          sleep(5000);
         }
       })
     })
