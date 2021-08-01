@@ -72,7 +72,7 @@ async function checkWX(){
         if (hasKeyword(alert, keyword) && isNewAlert(alert)){
           console.log('send text');
           // sendText(RYAN_NO, `${location.id} - ${alert.headline}`);
-          sendText(CHARIS_NO, `${location.id} - ${alert.headline}`);
+          sendText(CHARIS_NO, `${location.id} - ${alert.headline}. Alert time was ${alert.onsetEpoch} and current time is ${Math.floor(Date.now() / 1000)}.`);
           // sendText(DAD_MORSE_NO, `${location.id} - ${alert.headline}`);
           // sendText(MOM_MORSE_NO, `${location.id} - ${alert.headline}`); 
           sleep(5000);
