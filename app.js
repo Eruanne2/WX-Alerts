@@ -22,15 +22,15 @@ async function checkWX(){
     let alertStart = alert.onsetEpoch;
     let ONE_HOUR = 60 * 60;
 
-    console.log(alert.onset)
-    console.log(new Date(alert.onset))
-    console.log(alertStart);
+    // console.log(alert.onset)
+    // console.log(new Date(alert.onset))
+    // console.log(alertStart);
 
-    console.log(new Date())
-    console.log(currentTime);
+    // console.log(new Date())
+    // console.log(currentTime);
 
-    console.log(ONE_HOUR);
-    console.log((currentTime - alertStart) <= ONE_HOUR);
+    // console.log(ONE_HOUR);
+    // console.log((currentTime - alertStart) <= ONE_HOUR);
 
     return ((currentTime - alertStart) <= ONE_HOUR);
   }
@@ -72,7 +72,7 @@ async function checkWX(){
         if (hasKeyword(alert, keyword) && isNewAlert(alert)){
           console.log('send text');
           // sendText(RYAN_NO, `${location.id} - ${alert.headline}`);
-          sendText(CHARIS_NO, `${location.id} - ${alert.headline}. Alert time was ${alert.onsetEpoch} and current time is ${Math.floor(Date.now() / 1000)}.`);
+          sendText(CHARIS_NO, `${location.id} - ${alert.headline}. Alert ${alert.onsetEpoch} Now ${Math.floor(Date.now() / 1000)}.`);
           // sendText(DAD_MORSE_NO, `${location.id} - ${alert.headline}`);
           // sendText(MOM_MORSE_NO, `${location.id} - ${alert.headline}`); 
           sleep(5000);
