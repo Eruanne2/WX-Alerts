@@ -71,7 +71,7 @@ async function checkWX(){
       preferences.forEach(keyword => {
         if (hasKeyword(alert, keyword) && isNewAlert(alert)){
           console.log('send text');
-          // sendText(RYAN_NO, `${location.id} - ${alert.headline}`);
+          sendText(RYAN_NO, `${location.id} - ${alert.headline}`);
           sendText(CHARIS_NO, `${location.id} - ${alert.headline}. Alert ${alert.onsetEpoch} Now ${Math.floor(Date.now() / 1000)}.`);
           // sendText(DAD_MORSE_NO, `${location.id} - ${alert.headline}`);
           // sendText(MOM_MORSE_NO, `${location.id} - ${alert.headline}`); 
