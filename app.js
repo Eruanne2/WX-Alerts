@@ -9,7 +9,7 @@ async function checkWX(){
 
   const wxRequest = {
     method: 'GET',
-    url: `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?aggregateHours=24&contentType=json&unitGroup=us&locationMode=array&key=${WX_KEY}&locations=Enid,OK|Tyrone,GA|Alamogordo,NM|Cloudcroft,NM|WitchitaFalls,TX|Atlanta,GA|Valdosta,GA|Pueblo,CO&alertLevel=detail`
+    url: `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?aggregateHours=24&contentType=json&unitGroup=us&locationMode=array&key=${WX_KEY}&locations=Enid,OK|Tyrone,GA|Alamogordo,NM|Cloudcroft,NM|WitchitaFalls,TX|Atlanta,GA|Valdosta,GA|Pueblo,CO|Malta,IL&alertLevel=detail`
   }
 
   function hasKeyword(alert, keyword) {
@@ -71,7 +71,7 @@ async function checkWX(){
       preferences.forEach(keyword => {
         if (hasKeyword(alert, keyword) && isNewAlert(alert)){
           console.log('send text');
-          sendText(RYAN_NO, `${location.id} - ${alert.headline}`);
+          // sendText(RYAN_NO, `${location.id} - ${alert.headline}`);
           sendText(CHARIS_NO, `${location.id} - ${alert.headline}. Alert ${alert.onsetEpoch} Now ${Math.floor(Date.now() / 1000)}.`);
           // sendText(DAD_MORSE_NO, `${location.id} - ${alert.headline}`);
           // sendText(MOM_MORSE_NO, `${location.id} - ${alert.headline}`); 
